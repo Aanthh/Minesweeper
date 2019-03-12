@@ -23,13 +23,13 @@ void setup ()
 public void setBombs()
 {
     //your code
-    for(int i = 0; i < 1; i++){
-        for(int x = 0; i < 1; i++){
+    for(int i = 0; i < 50; i++){
+        for(int x = 0; i < 50; i++){
             int r = (int)(Math.random() * 20);
             int c = (int)(Math.random() * 20);
             if(!bombs.contains(buttons[r][c])){
             bombs.add(buttons[r][c]);
-            System.out.println(r + ", " + c);
+            //System.out.println(r + ", " + c);
             }   
         }
     }
@@ -42,14 +42,22 @@ public void draw ()
         displayWinningMessage();
 }
 public boolean isWon(){
-    for(int i = 0; i < NUM_ROWS; i++){
-        for(int x = 0; i < NUM_COLS; i++){
-            if(buttons[i][x].isClicked() && ??){
-                return true;
+       for(int i = 0; i < bombs.size(); i++){
+        if(!bombs.get(i).isMarked()){
+            return false;
+        }
+    }
+        
+    for(int r = 0; r < NUM_ROWS; r++){
+        for(int c = 0; c < NUM_COLS; c++){
+            if(!bombs.contains(buttons[r][c])){
+                if(!buttons[r][c].isClicked()){
+                    return false;
+                }
             }
         }
     }
-    return false;
+    return true;
 }
 public void displayLosingMessage()
 {
